@@ -29,11 +29,6 @@ function calc(){let mob=0,hatTotal=0;
 for(let i=1;i<=3;i++){let h=v('hat'+i+'a')+v('hat'+i+'b')+v('hat'+i+'c'),rate=h>=25?70:h>=15?50:30,hp=h*rate;put('hat'+i+'info',h+' / '+rs(rate));put('hat'+i+'pay',rs(hp));hatTotal+=hp;
 let a=v('sc'+i+'a'),b=v('sc'+i+'b'),c=v('sc'+i+'c'),n=a+b+c,rr=n>=50?[60,50,30]:n>=25?[40,30,20]:n>=15?[20,15,10]:[0,0,0],base=a*rr[0]+b*rr[1]+c*rr[2],cc=n>=15?Math.min(570,v('sc'+i+'d')*1.9):0;put('sc'+i+'slab',n+' / '+(n>=50?'50+':n>=25?'25–49':n>=15?'15–24':'1–14, no payout'));put('sc'+i+'base',rs(base));put('sc'+i+'connect',rs(cc));put('sc'+i+'total',rs(base+cc));mob+=base+cc}
 let rc=v('rrConn'),rq=v('rrCount'),rate=1.9;if(rc>=1500&&rq>=150)rate=19;else if(rc>=1000&&rq>=150)rate=14;else if((rc>=1000&&rq>=100)||(rc>=500&&rq>=150))rate=9;let rrPay=rq*rate;let rrBand=(rc===0||rq===0)?'Enter monthly figures':(rate===1.9?'₹1.90 per eligible recharge':rs(rate)+' per eligible recharge');put('rrRate',rrBand);put('rrPay',rs(rrPay));mob+=rrPay;
-let hr=v('homeRRCount'),hrRate=hr>=25?50:hr>=10?40:hr>=1?30:0,hrPay=hr*hrRate;put('homeRRRate',(hr>=25?'25+':hr>=10?'10–24':hr>=1?'1–9':'No payout')+' / '+rs(hrRate));put('homeRRPay',rs(hrPay));home+=hrPay;
-let sp=v('starterCount')*72;put('starterPay',rs(sp));mob+=sp;
-let sn=v('skycNew')*50,sm=v('skycMnp')*100;put('skycNewPay',rs(sn));put('skycMnpPay',rs(sm));put('skycPay',rs(sn+sm));mob+=sn+sm;
-let mp=v('matchCount')*10;put('matchPay',rs(mp));mob+=mp;
-let fa=v('fiberA'),lo=Math.min(fa,v('fiberLoyal')),faBase=fa*80+(fa>=5?fa*20:0),loPay=lo*25,bp=v('fB100one')*100+v('fB100two')*200+v('fB150one')*150+v('fB150two')*300+v('fB200one')*200+v('fB200two')*400,fp=faBase+loPay+bp;put('fiberABase',rs(faBase));put('fiberLoyalPay',rs(loPay));put('fiberBPay',rs(bp));put('fiberPay',rs(fp));home+=fp;
 let total=mob+hatTotal;put('mobSummary',rs(mob));put('hatSummary',rs(hatTotal));put('topTotal',rs(total));put('grandTotal',rs(total));put('grandSub','SC+ & Recharge Reminder '+rs(mob)+' · Hat-Trick '+rs(hatTotal))}
 function resetAll(){ids.forEach(id=>document.getElementById(id).value=0);calc()}ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));calc();
 </script></body></html>
